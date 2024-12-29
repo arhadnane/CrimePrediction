@@ -1,0 +1,42 @@
+@startuml
+actor User
+
+User -> Program: Main()
+activate Program
+
+Program -> Program: CreateHostBuilder(args).Build()
+activate Program
+
+Program -> CrimePredictionController: GetCrimePrediction("Motor Vehicle Theft", "050XX N LAKE SHORE DR SB")
+activate CrimePredictionController
+
+CrimePredictionController -> CrimePredictionService: PredictCrimeFrequency("Motor Vehicle Theft", "050XX N LAKE SHORE DR SB")
+activate CrimePredictionService
+
+CrimePredictionService -> CrimeDataProvider: FetchCrimeIncidentsAsync(41.9751781, -87.6499609, "2023-01-01T00:00:00Z", "2023-12-31T23:59:59Z", "2mi")
+activate CrimeDataProvider
+
+CrimeDataProvider -> CrimeometerAPI: FetchCrimeIncidents
+activate CrimeometerAPI
+CrimeometerAPI --> CrimeDataProvider: List<CrimeIncident>
+deactivate CrimeometerAPI
+
+CrimeDataProvider --> CrimePredictionService: List<CrimeIncident>
+deactivate CrimeDataProvider
+
+CrimePredictionService -> CrimePredictionModel: Predict(List<CrimeData>)
+activate CrimePredictionModel
+CrimePredictionModel --> CrimePredictionService: CrimePrediction
+deactivate CrimePredictionModel
+
+CrimePredictionService --> CrimePredictionController: float
+deactivate CrimePredictionService
+
+CrimePredictionController --> Program: ActionResult<float>
+deactivate CrimePredictionController
+
+Program -> Console: WriteLine($"Predicted crime frequency: {prediction}")
+deactivate Program
+
+@enduml
+

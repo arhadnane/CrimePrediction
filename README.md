@@ -44,6 +44,12 @@ This application uses the [Crimeometer API](https://www.crimeometer.com/#comp-io
 
 To use the Crimeometer API, you need to sign up for an API key on their website. Once you have the API key, configure it in the `CrimeDataProvider` class as shown in the Configuration section.
 
+## Sequence Diagram
+
+The following sequence diagram illustrates the flow of a request from the user to the prediction result being displayed in the console, including the call to the Crimeometer API to fetch crime incident data:
+
+![Sequence Diagram](docs/SeqDiag.png)
+
 ## Tests
 
 Unit tests are written using `xUnit`, `Moq`, and `FluentAssertions`.
