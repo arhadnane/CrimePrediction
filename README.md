@@ -48,7 +48,7 @@ To use the Crimeometer API, you need to sign up for an API key on their website.
 
 The following sequence diagram illustrates the flow of a request from the user to the prediction result being displayed in the console, including the call to the Crimeometer API to fetch crime incident data:
 
-![Sequence Diagram](docs/SeqDiag.png)
+![Sequence Diagram](CrimePrediction/docs/SeqDiag.png)
 
 ## Tests
 
